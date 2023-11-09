@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <!-- HTML & CSS Uppgift 2 - Kristoffer Bengtsson -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" href="style.css" />
+    <!-- Script for automatically closing the simple burger menu when clicking a menu option, runs after page has finished loading  -->
+    <script src="script.js" defer></script>
+    <title>HTML &amp; CSS: Uppgift 2</title>
+  </head>
+  <body>
+    <!-- MAIN PAGE HEADER WITH NAVBAR AND LOGO -->
+    <header id="mainmenu">
+      <!-- Site logo, not much point making it a link on a single page design. Image overlaps the navbar halfway vertically, lining up centered with the line at the header bottom  -->
+      <div id="logo"><img src="images/kblogo.png" alt="KB logo" /></div>
+      <nav>
+        <!-- Burger menu button and checkbox tracking the open/closed state of the menu - only used for narrower screen sizes -->
+        <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+        <label for="nav-toggle" id="nav-button" tabindex="0"><span>Main menu</span></label>
+        <!-- Main menu items - toggled visible/hidden by the above button on narrow screens - always visible on wider screens -->
+        <ul>
+          <li><a href="#info">Info</a></li>
+          <li><a href="#skill">Skills</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <!-- HERO IMAGE WITH PAGE HEADING AND BUTTON LINKING TO CONTACT FORM -->
+    <div id="hero">
+      <h1>Kristoffer</h1>
+      <h2>Portfolio</h2>
+      <a href="#contact" class="link-button">Contact me</a>
+    </div>
+    <!-- MAIN PAGE CONTENT AREA -->
+    <main>
+      <!-- SELLING INFO SECTION: 3 boxes with text -->
+      <!-- Flex container for info boxes - using <div> instead of <section> here since this part has no main section heading -->
+      <div id="info">
+        <!-- First box with selling info -->
+        <div>
+          <img src="images/icon-webdev.png" alt="Web development symbol" class="info-image" />
+          <h2>Web</h2>
+          <p>I have been involved in creating a number of smaller web sites for various of organisations.</p>
+          <p>
+            I mostly focused on the <strong>back-end</strong> functionality, such as creating simple custom booking and reservation systems, event registration systems and
+            information databases. I have also created visual themes for the CMS used by the sites.
+          </p>
+          <p>I worked with the Drupal CMS as a base, using PHP, MySQL and MariaDB as building blocks.</p>
+        </div>
+        <!-- Second box with selling info -->
+        <div>
+          <img src="images/icon-translate.png" alt="Translate symbol" class="info-image" />
+          <h2>Translation</h2>
+          <p>
+            I have worked translating texts of different kinds and lengths from Swedish into English, or vice versa. Mostly, but not only, for use on web sites. This work also
+            included proof-reading texts.
+          </p>
+          <p>The most complex translation work I have been involved in is translating the 360 pages book <em>"Vikingakungens guldskatt"</em> by Sven Rosborn into English.</p>
+        </div>
+        <!-- Third box with selling info -->
+        <div>
+          <img src="images/icon-modding.png" alt="Games symbol" class="info-image" />
+          <h2>Games</h2>
+          <p>There is more to a creative life than just work.</p>
+          <p>
+            I have always enjoyed spending my relaxation time playing computer games. Many games I play also tend to tickle my creative itch, inspiring me to create mods for them
+            to better suit my personal tastes or add things I found missing.
+          </p>
+          <p>
+            I have created numerous game mods over the years, as well as a few modding tools and utilities when such were not available. Most for my own use, but a few released
+            into the wild.
+          </p>
+        </div>
+      </div>
+      <!-- SKILLS SECTION: 4 boxes with text+image -->
+      <section id="skill">
+        <h2 class="section-heading">My skills</h2>
+        <!-- Grid container for skill info boxes -->
+        <div id="skills">
+          <!-- First box with skill info -->
+          <div>
+            <!--Text column -->
+            <div class="skill-text">
+              <h3>HTML</h3>
+              <p>The basic building block of the World Wide Web, HTML has gone through many mutations over the years but remains an essential component for building web pages.</p>
+            </div>
+            <!-- Image column -->
+            <figure class="skill-media">
+              <img src="images/box-html.png" alt="An image showing some HTML markup with the HTML5 logotype on top." />
+            </figure>
+          </div>
+          <!-- Second box with skill info -->
+          <div>
+            <div class="skill-text">
+              <h3>CSS</h3>
+              <p>
+                Defining the layout and design of the web, CSS has allowed web pages to come a long way from their humble beginning as plain text with simple formatting to complete
+                user interfaces.
+              </p>
+            </div>
+            <figure class="skill-media">
+              <img src="images/box-css.png" alt="An image showing some CSS rules with the CSS3 logotype on top." />
+            </figure>
+          </div>
+          <!-- Third box with skill info -->
+          <div>
+            <div class="skill-text">
+              <h3>Javascript</h3>
+              <p>
+                Growing the web page from a mere document with structured information into a full fledged application, Javascript is a core component for making your page do
+                whatever you want.
+              </p>
+            </div>
+            <figure class="skill-media">
+              <img src="images/box-js.png" alt="An image showing some Javscript code with the Javascript logotype on top." />
+            </figure>
+          </div>
+          <!-- Fourth box with skill info -->
+          <div>
+            <div class="skill-text">
+              <h3>Backend</h3>
+              <p>
+                Being able to store, retrieve and process data on the server side is useful when building web applications. As such I know my way around the PHP scripting language
+                and SQL databases, with some experience with the Drupal CMS.
+              </p>
+            </div>
+            <figure class="skill-media">
+              <img src="images/box-php.png" alt="An image showing some PHP code with the PHP logotype on top." />
+            </figure>
+          </div>
+        </div>
+      </section>
+      <!-- BLOG SECTION: Articles with text+image and a sidebar with a categories menu -->
+      <section id="blog">
+        <h2 class="section-heading">Blog</h2>
+        <!-- The blog articles column -->
+        <div class="blog-articles">
+          <!-- BLOG: The first blog article - id is not used for styling but to link it to its popup image viewer below -->
+          <article id="blog-article-1">
+            <!-- Blog article header with the title -->
+            <header>
+              <h3><a href="#">Ancient history unearthed</a></h3>
+            </header>
+            <!-- The text of the blog article -->
+            <div class="blog-body">
+              <p>Digging through the depths of the Archive folder on my hard drive I came across an old screenshot of the first serious website I worked on.</p>
+              <p>
+                The site was made for a startup online recruiting service called <em>Jobado</em>, operating out of SoftCenter in Ronneby just next to the university college campus.
+                I worked there during the summer vacation of 2000 along with three other fellow BTH students to develop their website.
+              </p>
+              <p>
+                Jobado did not last long as it went bankrupt during the massive IT bubble crash in 2001 like so many other fledgling IT companies. But at least this memory remains.
+                🙂
+              </p>
+            </div>
+            <!-- The image of the blog article -->
+            <figure class="blog-media">
+              <a href="#blog-image-1"><img src="images/past-job.png" alt="Screenshot of an old website from the year 2000." /></a>
+            </figure>
+            <!-- Full-screen viewer popup of the image, shown if the blog-image is clicked - click on the viewer to close it again  -->
+            <a href="#blog-article-1" class="blog-imagebox" id="blog-image-1">
+              <img src="images/past-job.png" alt="Screenshot of an old website from the year 2000." />
+            </a>
+            <!-- Blog article footer with author/creation info and comments link -->
+            <footer>
+              <ul>
+                <li><strong>Comments: </strong><a href="#">0</a></li>
+                <li><strong>Category: </strong><a href="#">Web development</a></li>
+                <li><strong>Posted: </strong><time datetime="2023-10-14">2023-10-14</time></li>
+              </ul>
+            </footer>
+          </article>
+          <!-- BLOG: A second, older blog article -->
+          <article id="blog-article-2">
+            <!-- Blog article header with the title -->
+            <header>
+              <h3><a href="#">Benji doing his thing</a></h3>
+            </header>
+            <!-- The text of the blog article -->
+            <div class="blog-body">
+              <p>On a completely random note...</p>
+              <p>
+                My parents visited and brought their dog Benji with them. The very cute border collie quickly found himself at home on my couch, even though this was his first
+                visit to my place.
+              </p>
+              <p>
+                Fancying himself something of a couch connoisseur Benji tends to try out the seating furniture of anyone he visits. Being cute and charming, and knowing it, he gets
+                away with it too, mostly.
+              </p>
+              <p>
+                Adopted from a dog shelter with an unknown but seemingly troubled past it is nice to see the timid dog regain some measure of self confidence and find himself at
+                home in his new family.
+              </p>
+            </div>
+            <!-- The image of the blog article -->
+            <figure class="blog-media">
+              <a href="#blog-image-2"><img src="images/benji.jpg" alt="The dog Benji sitting on my couch with a happy grin." /></a>
+            </figure>
+            <!-- Full-screen viewer popup of the image, shown if the blog-image is clicked -->
+            <a href="#blog-article-2" class="blog-imagebox" id="blog-image-2">
+              <img src="images/benji.jpg" alt="The dog Benji sitting on my couch with a happy grin." />
+            </a>
+            <!-- Blog article footer with author/creation info and comments link -->
+            <footer>
+              <ul>
+                <li><strong>Comments: </strong><a href="#">1</a></li>
+                <li><strong>Category: </strong><a href="#">Miscellaneous</a></li>
+                <li><strong>Posted: </strong><time datetime="2023-10-04">2023-10-04</time></li>
+              </ul>
+            </footer>
+          </article>
+        </div>
+        <!-- Blog sidebar with categories navigation menu -->
+        <aside id="blog-nav">
+          <!-- The categories menu -->
+          <nav>
+            <h3>Category</h3>
+            <ul>
+              <li><a href="#">Frontend development</a></li>
+              <li><a href="#">Backend development</a></li>
+              <li><a href="#">Web development</a></li>
+              <li><a href="#">Hobbies</a></li>
+              <li><a href="#">Miscellaneous</a></li>
+            </ul>
+          </nav>
+          <!-- Link up to the top of the blog categories sidebar and article list -->
+          <div class="blog-cat-up" title="Up to first blog article.">
+            <a href="#blog-nav"><img src="images/up.png" alt="Up to first blog article." /></a>
+          </div>
+        </aside>
+      </section>
+      <!-- CONTACT FORM SECTION: Form with an image next to it -->
+      <section id="contact">
+        <h2 class="section-heading">Contact</h2>
+        <!-- The contact form -->
+        <form class="contactform" action="contact.html" method="POST">
+          <!-- Name field: required 4-200 characters -->
+          <label for="form-name">Your name</label>
+          <input type="text" name="form-name" id="form-name" minlength="4" maxlength="200" placeholder="Your name here..." required />
+          <!-- The email field: optional 4 - 254 characters -->
+          <label for="form-email">Your e-mail address</label>
+          <input type="email" name="form-email" id="form-email" minlength="4" maxlength="254" placeholder="name@example.com" />
+          <!-- The message text field: required 1 to 3000 characters -->
+          <label for="form-message">Your message</label>
+          <textarea name="form-message" id="form-message" maxlength="3000" rows="8" placeholder="Your message goes here..." required></textarea>
+          <!-- The form submit button -->
+          <input type="submit" name="form-submit" id="form-submit" value="Contact me" />
+        </form>
+        <!-- Image shown next to the form (on wider screen sizes) -->
+        <img src="images/speech-bubble.svg" alt="A speech bubble, by the contact form." />
+      </section>
+    </main>
+    <!-- MAIN PAGE FOOTER: Author, contact info, updated date etc -->
+    <footer>
+      <!-- Layout wrapper to constrain max width of footer content -->
+      <div>
+        <img src="images/kblogo.png" alt="Small KB logo" class="logo-small" />
+        <ul>
+          <li>&copy; 2023 Kristoffer Bengtsson</li>
+          <li><a href="mailto:kristoffer.bengtsson@gritacademy.se">kb@gritacademy.se</a></li>
+          <li>Updated: <time datetime="2023-10-26">2023-10-26</time></li>
+        </ul>
+      </div>
+    </footer>
+  </body>
+</html>

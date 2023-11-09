@@ -1,0 +1,1160 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800,400italic,700italic"); /* Font used for body text */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700,800,900"); /* Font used for (most) headings */
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&display=swap"); /* Font used for hero main heading */
+@import url("https://fonts.googleapis.com/css2?family=Acme&display=swap"); /* Font used for hero sub-heading */
+
+/* 
+HTML & CSS Uppgift 2 - Kristoffer Bengtsson 
+*/
+
+/* Prevent padding from messing up the box sizes */
+* {
+  box-sizing: border-box;
+}
+
+/* Maximum allowed main content width on default screen sizes */
+/* Set this lower to "snap" to fixed content size with margins, but use the full width for narrow screens here */
+/* Set hard cap for the min and max allowed width for the whole page */
+:root {
+  --maxContentWidth: 100%;
+  --minPageWidth: 320px;
+  --maxPageWidth: 1920px;
+  --boxHeadingColor: rgb(223, 190, 102);
+}
+
+/* Darker grey side margins on screens wider than maxPageWidth  */
+html {
+  background-color: rgb(20, 20, 20);
+}
+
+/* Change the body to a flexbox and center its content on the screen, set min and max allowed page width */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  font-family: "Open Sans", Verdana, Arial, sans-serif;
+  font-size: 12pt;
+  color: white;
+  background-color: rgb(31, 31, 31);
+  min-width: var(--minPageWidth);
+  max-width: var(--maxPageWidth);
+  margin: 0 auto;
+}
+
+/* Change default font of the headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Roboto Condensed", Verdana, Arial, sans-serif;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+/* Make the default headings a bit larger  */
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 3.5rem;
+}
+
+h3 {
+  font-size: 3rem;
+}
+
+h4 {
+  font-size: 2.5rem;
+}
+
+h5 {
+  font-size: 2rem;
+}
+
+h6 {
+  font-size: 1.5rem;
+}
+
+/* Prevent images from overflowing their parent element width  */
+img {
+  max-width: 100%;
+}
+
+/* Remove the default spacing from the figure elements */
+figure {
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Change link color to orange, both visited and regular links look the same */
+a,
+a:visited {
+  color: orange;
+  text-decoration: none;
+}
+
+/* Change color of hovered-over links to yellow */
+a:hover {
+  color: yellow;
+}
+
+/* Main page content, add space between content sections, set max allowed width */
+main {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 8rem;
+  max-width: var(--maxContentWidth);
+  margin-bottom: 3rem;
+}
+
+/* The main heading of each page section is extra large and centered... */
+.section-heading {
+  font-size: 5rem;
+  text-align: center;
+  padding-bottom: 0.75rem;
+}
+
+/* ...and the first character in the heading is is orange to make them stand out a bit more. */
+.section-heading:first-letter {
+  color: orange;
+}
+
+/********************************************************************************/
+/******* PAGE HEADER AND NAVIGATION MENU *******/
+
+/* The main page header, dark bar at the top containing the main menu and the logo */
+/* Make the header fill the entire width of the body (as body is flex) */
+#mainmenu {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  justify-items: flex-start;
+  width: 100%;
+  background-color: black;
+  color: white;
+  border-bottom: 2px solid rgb(194, 98, 31);
+}
+
+/* Main logo wrapper element for positioning. */
+#logo {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* Absolute position the logo within the wrapper element to take it out of the flow, allowing half of it to extend down below the header bar */
+#logo img {
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  height: 7rem;
+  max-width: none;
+}
+
+/* Align the menu to the right side of the header */
+#mainmenu nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+/* List of menu options, on narrow screens display as a right-aligned vertical list */
+/* Hide the menu options list as the menu is not open by default */
+#mainmenu nav ul {
+  display: none;
+  justify-content: flex-end;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 0px;
+  flex-wrap: nowrap;
+  list-style: none;
+  margin: 0px;
+  padding: 0.7rem 0 0.7rem 0.7rem;
+}
+
+/* Menu options, change to narrower font and uppercase letters */
+#mainmenu nav li {
+  margin: 0px;
+  padding: 5px;
+  text-align: right;
+  font-family: "Roboto Condensed", Arial, sans-serif;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 5px 20px;
+}
+
+/* Links in the main menu are white... */
+#mainmenu nav li a,
+#mainmenu nav li a:visited {
+  color: white;
+  text-decoration: none;
+}
+
+/* ... and become glowing yellow when hovered over or have focus */
+#mainmenu nav li a:focus,
+#mainmenu nav li a:hover {
+  color: yellow;
+  text-shadow: 0px 0px 12px yellow, 0px 0px 8px orange;
+  outline: 0;
+}
+
+/* PRIMITIVE BURGER MENU BUTTON - INSTEAD OF REGULAR MENU ON NARROW VIEWPORT SIZES */
+
+/* Checkbox to keep track of if the main menu is open */
+/* Hide the checkbox from view by placing it beyond the left edge of the document: its label (the "button") will be used to interact with it instead. */
+#nav-toggle {
+  position: absolute;
+  left: -100px !important;
+}
+
+/*
+The burger menu button is the label of the nav-toggle checkbox, styled to look like a burger menu,
+since the checkbox itself cannot be restyled to look as desired for this purpose. 
+*/
+#nav-button {
+  display: flex;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  color: white;
+  background-color: black;
+  padding: 3px 5px 3px 5px;
+  cursor: pointer;
+  margin-top: 0.6rem;
+  margin-right: 0.6rem;
+  margin-bottom: 0.6rem;
+}
+
+/* Hide the text on the label from normal view while still (hopefully) allowing screen readers to see it */
+#nav-button span {
+  position: relative;
+  font-size: 1pt;
+  color: transparent;
+}
+
+/* 
+The three lines of the burger menu are created by using a span element along with its ::before and ::after pseudo-elements
+restyled as fixed-height blocks with a background color and some border rounding. 
+*/
+#nav-button span,
+#nav-button span::before,
+#nav-button span::after {
+  display: block;
+  background: white;
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  margin: 0px;
+  padding: 0px;
+}
+
+/* Position the top line of the burger menu above its element (center line) */
+#nav-button span::before {
+  position: absolute;
+  content: "";
+  bottom: 10px;
+}
+
+/* Position the bottom line of the burger menu below its element (center line) */
+#nav-button span::after {
+  position: absolute;
+  content: "";
+  top: 10px;
+}
+
+/* Change the color of the burger menu lines when the button is hovered over or has focus */
+#nav-button:focus span,
+#nav-button:focus span::before,
+#nav-button:focus span::after,
+#nav-button:hover span,
+#nav-button:hover span::before,
+#nav-button:hover span::after {
+  background-color: yellow;
+}
+
+/* Display the menu options list when the state checkbox is checked (i.e. the menu is open) */
+#nav-toggle:checked ~ ul {
+  display: flex;
+}
+
+/* When the menu is opened hide the middle line of the burger button span to form a cross instead */
+#nav-toggle:checked ~ #nav-button span {
+  height: 0px;
+}
+
+/* When the menu is opened center the top line of the button and rotate it 45 degrees to form a cross */
+#nav-toggle:checked ~ #nav-button span::before {
+  transform: rotate(45deg);
+  top: -2px;
+}
+
+/* When the menu is opened center the bottom line of the button and rotate it -45 degrees to form a cross */
+#nav-toggle:checked ~ #nav-button span::after {
+  transform: rotate(-45deg);
+  top: -2px;
+}
+
+/********************************************************************************/
+/******* HERO IMAGE *******/
+
+/* Hero image block, make background image cover the element and trim appropriately, make it always 90% of viewport height */
+/* Center the headings and button on the hero image */
+#hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("images/hero.jpg");
+  background-size: cover;
+  background-position: 80% center;
+  background-repeat: no-repeat;
+  min-height: 90vh;
+  width: 100%;
+  color: white;
+}
+
+/* Headings on the hero image */
+#hero h1,
+#hero h2 {
+  text-transform: uppercase;
+  margin: 0;
+  padding: 0;
+  opacity: 0.85;
+}
+
+/* Change font and add some background shading under the text to make it more readable over the background image */
+/* Scale the size of the hero main heading based on viewport width, constrained between 4rem (fits at 320px wide) to 9rem (not too big on wider screens) */
+#hero h1 {
+  font-family: "Barlow Condensed", Verdana, Arial, sans-serif;
+  font-size: clamp(4rem, 15vw, 9rem);
+  line-height: 95%;
+  color: white;
+  text-shadow: 0px 0px 15px rgba(0, 0, 0, 0.7);
+}
+
+/* Make the first character of the main heading orange and 10% larger than the rest */
+#hero h1:first-letter {
+  font-size: 1.1em;
+  color: orange;
+}
+
+/* Change font and add some background glow under the text to make it more readable over the background image */
+/* Scale the size of the hero sub heading based on viewport width, to be half the size of the main heading */
+#hero h2 {
+  font-family: "Acme", Arial, sans-serif;
+  font-size: clamp(2rem, 7.5vw, 4.5rem);
+  color: rgb(20, 20, 20);
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.7);
+}
+
+/* Make the first character of the sub-heading 10% larger than the rest */
+#hero h2:first-letter {
+  font-size: 1.1em;
+}
+
+/* Restyle the hero contact link to look like a button  */
+.link-button,
+.link-button:visited {
+  display: block;
+  padding: 1.2rem 1.8rem;
+  margin-top: 1rem;
+  border: 1px solid white;
+  color: white;
+  border-radius: 15px;
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 700;
+  background-color: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+}
+
+/* Make the Contact Me button glow orange when hovered over or having focus */
+.link-button:focus,
+.link-button:hover {
+  color: orange;
+  border: 1px solid orange;
+  text-shadow: 0px 0px 12px orange;
+  box-shadow: 0px 0px 10px orange inset;
+  outline: 0;
+}
+
+/********************************************************************************/
+/******* PAGE FOOTER *******/
+
+/* Footer spans the width of the body and has its content centered */
+body > footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(44, 51, 65);
+}
+
+/* content block of the footer, capped at the width of the page main content area */
+body > footer > div {
+  padding: 2rem;
+  width: 100%;
+  max-width: var(--maxContentWidth);
+  text-align: center;
+}
+
+/* Scale down the logo image used in the footer */
+.logo-small {
+  width: 90px;
+}
+
+/* Items displayed in the footer are a list without bullets */
+/* On narrow screens stack the items on top of each other */
+body > footer ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+body > footer li {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* Make the first item in the footer bold */
+body > footer li:first-of-type {
+  font-weight: 700;
+}
+
+/* Make the last item in the footer italic */
+body > footer li:last-of-type {
+  font-style: italic;
+}
+
+/********************************************************************************/
+/******* THE SELLING INFO BOXES SECTION *******/
+
+/* Selling Info section, style as flex, evenly spread out, allow wrapping boxes onto a new line when running out of space */
+#info {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* The selling info boxes, using 300px as basis to wrap box onto new line when they start getting too narrow */
+#info > div {
+  flex: 1 1 300px;
+  padding: 1.4rem 1.6rem;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* First info box has a blue background - subtle gradient to make it look less flat */
+#info > div:first-of-type {
+  background-color: rgb(41, 49, 61);
+  background: linear-gradient(to right top, rgb(41, 49, 61), rgb(60, 73, 92));
+  border: 4px solid rgb(60, 73, 92);
+}
+
+/* Second info box has a grey background -   --"-- */
+#info > div:nth-of-type(2) {
+  background-color: rgb(50, 50, 50);
+  background: linear-gradient(to right top, rgb(50, 50, 50), rgb(68, 67, 67));
+  border: 4px solid rgb(68, 67, 67);
+}
+
+/* Last info box has a purple background -  --"-- */
+#info > div:last-of-type {
+  background-color: rgb(60, 41, 61);
+  background: linear-gradient(to right top, rgb(60, 41, 61), rgb(79, 52, 80));
+  border: 4px solid rgb(79, 52, 80);
+}
+
+/* The title of an info box */
+#info h2 {
+  color: rgba(223, 190, 102, 0.9);
+  text-align: center;
+  font-size: 3rem;
+}
+
+/* Remove bottom margin of the last paragraph in the boxes for more even spacing */
+#info > div p:last-of-type {
+  margin-bottom: 0px;
+}
+
+/* Scale down and center the icon images used above the text in the selling info boxes */
+.info-image {
+  max-height: 125px;
+  display: block;
+  margin: 0 auto;
+}
+
+/********************************************************************************/
+/******* THE SKILLS BOXES SECTION *******/
+
+/* Skills section */
+#skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Grid container for the skills boxes, single column on narrow screen sizes */
+#skills {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem 1.25rem;
+}
+
+/* The skill boxes, grid layout to make it easier to move things around on varying screen sizes */
+/* Narrow screen layout has the image placed above the text  */
+#skills > div {
+  background-color: rgb(8, 8, 8);
+  display: grid;
+  grid-template-areas: "skill-media" "skill-text";
+  grid-template-rows: auto 1fr;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Box heading, change the text color to make it stand out more */
+#skills > div h3 {
+  font-size: 3rem;
+  color: var(--boxHeadingColor);
+}
+
+/* Text region of a skill box, add some padding */
+#skills .skill-text {
+  grid-area: skill-text;
+  padding: 1rem 2rem;
+}
+
+/* Image region of a skill box */
+#skills .skill-media {
+  grid-area: skill-media;
+}
+
+/* Image in the skill box, change to block to remove line height gap below, make it scale to cover the parent figure container  */
+#skills .skill-media img {
+  display: block;
+  object-fit: cover;
+}
+
+/********************************************************************************/
+/******* THE BLOG SECTION *******/
+
+/* The blog section, styled as a grid to make it easier to move the components around */
+/* On narrow screens the Categories nav is located between the section heading and the blog articles region */
+#blog {
+  display: grid;
+  grid-template-areas:
+    "blog-heading"
+    "blog-nav"
+    "blog-articles";
+  gap: 1rem 2rem;
+}
+
+/* Heading of the whole blog section */
+#blog h2 {
+  grid-area: blog-heading;
+}
+
+/* Container for all the blog articles, add space between articles */
+#blog .blog-articles {
+  grid-area: blog-articles;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 3rem 2rem;
+  padding: 0px;
+}
+
+/* A blog article, styled as a grid to make it easier to move the layout components around as needed */
+/* On narrow screens show the image below the text. */
+#blog article {
+  display: grid;
+  grid-template-areas:
+    "blog-title"
+    "blog-body"
+    "blog-media"
+    "blog-footer";
+  grid-template-columns: 1fr;
+  gap: 0.5rem 2rem;
+  background-color: rgb(60, 60, 60);
+}
+
+/* Header of blog article, add a black background bar */
+#blog article header {
+  grid-area: blog-title;
+  background-color: black;
+}
+
+/* Title of the blog article, centered on narrow viewports */
+#blog article header h3 {
+  font-size: 2.2rem;
+  font-weight: 300;
+  text-align: center;
+  margin: 0;
+  padding: 0.2rem 1rem 0.2rem 1rem;
+  color: var(--boxHeadingColor);
+}
+
+/* Make title link always have the same color as the title */
+#blog article header h3 a,
+#blog article header h3 a:visited {
+  color: var(--boxHeadingColor);
+  text-decoration: none;
+}
+
+/* Make link yellow when hovered over */
+#blog article header h3 a:hover {
+  color: yellow;
+}
+
+/* Container for the text region of the blog article, cap the text at roughly 65 characters in width to make it easier to read. */
+#blog article .blog-body {
+  grid-area: blog-body;
+  max-width: 65ch;
+  padding: 0px 1.5rem;
+  text-align: justify;
+}
+
+/* Make the first paragraph of the blog text bold */
+#blog article .blog-body p:first-of-type {
+  font-weight: bold;
+}
+
+/* Container for the blog image, add some padding around the contained image */
+#blog article .blog-media {
+  grid-area: blog-media;
+  padding: 1rem 1rem 0px 1rem;
+}
+
+/* Make the image otherwise fit its container */
+#blog article .blog-media img {
+  width: 100%;
+}
+
+/* Image viewer box to look closer at a blog image in larger size - make it cover the entire viewport and block out the regular page content */
+/* Hidden by default until the related blog image is clicked */
+#blog .blog-imagebox {
+  display: none;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.75);
+  z-index: 1;
+}
+
+/* Show the corresponding image viewer element if a blog image was clicked */
+#blog .blog-imagebox:target {
+  display: flex;
+}
+
+/* Make the viewer image scale to fit on the screen if needed */
+#blog .blog-imagebox img {
+  max-width: 100%;
+  max-height: 100%;
+  border: 4px solid white;
+}
+
+/* Article footer, grey background block */
+#blog article footer {
+  grid-area: blog-footer;
+  margin-top: 1rem;
+  background-color: rgb(80, 80, 80);
+}
+
+/* Info shown in the footer, on narrow screens it will still be a vertical list but without bullets and indentation */
+#blog article footer ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0.5rem 0 0.5rem 0;
+}
+
+/* Each item shown in the article footer, reduce the font size and add some padding around the item */
+#blog article footer li {
+  font-size: 0.85rem;
+  padding: 0.25rem 1.2rem;
+}
+
+/**** Sidebar with the categories menu ****/
+
+/* On narrow screens it is just a simple list of categories sitting just above the blog articles list */
+#blog aside {
+  grid-area: blog-nav;
+}
+
+/* Heading of the categories menu -- hidden on narrow screen sizes */
+#blog aside h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 0;
+  display: none;
+}
+
+/* The blog categories navigation menu, centered below the Blog section heading on narrow screens */
+#blog aside nav {
+  display: flex;
+  justify-content: center;
+}
+
+/* List of blog category menu options -- vertical list without bullets on narrow screens */
+#blog aside ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  margin: 0px;
+  padding: 0 1rem 0.5rem 1rem;
+}
+
+#blog aside li {
+  text-align: center;
+  padding: 0.1rem 0px;
+  margin: 0px;
+}
+
+#blog aside li a {
+  display: block;
+  width: 100%;
+  font-family: "Roboto Condensed", Verdana, Arial, sans-serif;
+  text-decoration: none;
+}
+
+/* Add a colored arrow before each category in the list to replace the bullets */
+#blog aside li a::before {
+  content: "►";
+  font-family: Arial, sans-serif;
+  font-size: 0.9em;
+  padding-right: 0.5rem;
+  color: rgb(58, 120, 156);
+}
+
+/* Change link text color to yellow when hovered over or having focus */
+#blog aside li a:focus,
+#blog aside li a:hover {
+  color: yellow;
+  outline: 0;
+}
+
+/* Change color of the arrow to white when hovered over or having focus */
+#blog aside li a:focus::before,
+#blog aside li a:hover::before {
+  color: white;
+}
+
+/* Hide the "up to top" arrow button on narrow screens */
+#blog aside .blog-cat-up {
+  display: none;
+}
+
+/********************************************************************************/
+/******* THE CONTACT FORM *******/
+
+/* Contact form section -- grid to make it easier to shuffle the components around */
+/* The image is not included on narrow screen sizes */
+#contact {
+  display: grid;
+  grid-template-areas: "contact-title" "contact-form";
+  grid-template-columns: 1fr;
+  gap: 0 2rem;
+  align-items: stretch;
+  justify-content: center;
+}
+
+/* Heading of the contact form section */
+#contact > h2 {
+  grid-area: contact-title;
+}
+
+/* Speech bubble icon/image to show next to the form on wider screens -- hide it on narrow screens */
+#contact > img {
+  grid-area: contact-image;
+  display: none;
+  max-width: 320px;
+}
+
+/* The contact form itself, add some padding around it */
+#contact form {
+  grid-area: contact-form;
+  padding: 2rem;
+}
+
+/* The labels of all the form elements, show above the corresponding input element */
+#contact label {
+  display: block;
+  margin: 1.2rem 0.6rem 0.2rem 0.6rem;
+  font-weight: 700;
+  color: rgb(215, 215, 215);
+}
+
+/* Remove the top margin of the first label in the form */
+#contact label:first-of-type {
+  margin-top: 0px;
+}
+
+/* The name and email input fields, make them as wide as the form, add padding around the inputted text and round the corners */
+#contact input {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border-radius: 16px;
+  border: 0;
+}
+
+/* The form submit button, change color and size to make it more eye-catching than a normal button */
+#contact input[type="submit"] {
+  width: auto;
+  margin: 2rem 0 0 0;
+  padding: 0.5rem 0.75rem;
+  font-size: 1.5rem;
+  background-color: orange;
+  border-radius: 0.8rem;
+  border: 0px;
+  cursor: pointer;
+  outline: 0;
+}
+
+/* Make the Send button glow yellow when hovered over or having focus */
+#contact input[type="submit"]:hover,
+#contact input[type="submit"]:focus {
+  background-color: yellow;
+  box-shadow: 0 0 10px yellow, 0 0 20px orange;
+}
+
+/* The message text box, style it similar to the input elements and lock out horizontal resizing */
+#contact textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border-radius: 16px;
+  border: 0;
+  resize: vertical;
+}
+
+/*************************************** BREAK (460px): LARGER MOBILE SCREENS ***************************************/
+@media all and (min-width: 460px) {
+  /* Add some minor padding around the main content element */
+  main {
+    padding: 1rem;
+  }
+
+  /* Increase the font size of the section headings a little */
+  .section-heading {
+    font-size: 7rem;
+  }
+
+  /* Cap the skills boxes at 475px wide to keep them from becoming too big in the upper range of this single-column mode */
+  #skills {
+    max-width: 475px;
+  }
+
+  /* Change the blog categories nav to display the category links on the same line, with line-wrap allowed. */
+  #blog aside ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  /* Adjust the padding of menu items for single-line layout */
+  #blog aside li {
+    padding: 0.2rem 0.7rem;
+  }
+
+  /* Increase the side padding around the text a little */
+  #blog article .blog-body {
+    padding: 0px 2rem;
+  }
+
+  /* Change article footer items into a single row */
+  #blog article footer ul {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1.4rem;
+    margin: 0px;
+    padding: 0 0.5rem 0 0.5rem;
+  }
+
+  /* Adjust footer item padding for single-line layout */
+  #blog article footer li {
+    padding: 0.5rem;
+  }
+
+  /* But display the data below their labels in the blog article footer */
+  #blog article footer li strong {
+    display: block;
+  }
+}
+
+/*************************************** BREAK (680px): LANDSCAPE MOBILE AND TABLET SCREENS ***************************************/
+@media all and (min-width: 680px) {
+  /* Change the style of the main page footer info to a single line */
+  body > footer ul {
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  /* Add a red divider diamond between the footer items */
+  body > footer li:not(:first-child)::before {
+    content: "♦";
+    color: red;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    margin-right: 1rem;
+  }
+
+  /*** MAIN MENU: Switch from burger button to full main menu ***/
+
+  /* Hide the button and linked toggle-state checkbox */
+  #nav-button,
+  #nav-toggle {
+    display: none;
+  }
+
+  /* Make the menu list always visible */
+  /* Restyle the menu list as options shown on the same line */
+  #mainmenu nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row;
+    gap: 0px;
+  }
+
+  /* Add a divider line between menu entries */
+  #mainmenu nav li {
+    padding: 5px;
+    text-align: center;
+    font-size: 1.4rem;
+    border-left: 2px solid orange;
+    padding: 5px 20px 5px 20px;
+  }
+
+  /* Remove the divider line in front of the first menu item */
+  #mainmenu nav li:first-of-type {
+    border-left: none;
+  }
+
+  /* Swap Skills boxes section to two columns, i.e. two skills boxes per row */
+  #skills {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: none;
+  }
+
+  /* Alter blog article layout -- the image is now shown to the left of the text */
+  #blog article {
+    grid-template-areas:
+      "blog-title blog-title"
+      "blog-media blog-body"
+      "blog-footer blog-footer";
+    grid-template-columns: 1fr 2fr;
+    gap: 0.5rem 1rem;
+  }
+
+  /* Alternate showing the image to the right of the text on every odd-count blog article */
+  #blog article:nth-of-type(odd) {
+    grid-template-areas:
+      "blog-title blog-title"
+      "blog-body blog-media"
+      "blog-footer blog-footer";
+    grid-template-columns: 2fr 1fr;
+  }
+
+  /* Adjust the text padding for when image being displayed to the left to the text */
+  #blog article .blog-body {
+    padding: 0px 2rem 0px 1rem;
+  }
+
+  /* Adjust text padding for when the image is displayed to the right of the text instead */
+  #blog article:nth-of-type(odd) .blog-body {
+    padding: 0px 1rem 0px 2rem;
+  }
+
+  /* Alter padding around image container to better fit its new position */
+  #blog article .blog-media {
+    padding: 1rem 0px 0px 0px;
+  }
+
+  /* Add a rounded border around the image */
+  #blog article .blog-media img {
+    border: 2px solid rgb(31, 31, 31);
+    border-left: 0;
+    border-radius: 0px 20px 20px 0px;
+    overflow: hidden;
+  }
+
+  /* Adjust the border for right-positioned image */
+  #blog article:nth-of-type(odd) .blog-media img {
+    border-right: 0;
+    border-left: 2px solid rgb(31, 31, 31);
+    border-radius: 20px 0px 0px 20px;
+  }
+
+  /* Increase font size of article title and left-align the text */
+  #blog article header h3 {
+    font-size: 2.5rem;
+    text-align: left;
+  }
+
+  /* Move the article footer content to the right */
+  #blog article footer ul {
+    justify-content: flex-end;
+    gap: 1.4rem;
+  }
+
+  /* The labels for footer items should now be on the same line as their data again */
+  #blog article footer li strong {
+    display: inline;
+  }
+}
+
+/*************************************** BREAK (1024px): COMPUTER SCREENS ***************************************/
+@media all and (min-width: 1024px) {
+  /* Cap the content area at maximum 1280px wide regardless of screen size */
+  :root {
+    --maxContentWidth: 1280px;
+  }
+
+  /* Add a larger space around the main content area on wider screens */
+  main {
+    padding: 2rem;
+  }
+
+  /* Change the Skills boxes to display the images to the side of the text */
+  #skills > div {
+    grid-template-areas: "skill-text skill-media";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    max-width: none;
+  }
+
+  /* Alternate which side of the text the image is shown */
+  #skills > div:nth-of-type(odd) {
+    grid-template-areas: "skill-media skill-text";
+  }
+
+  /* Reduce the font size of the skill box heading slightly since the text region may now be a bit more narrow with the image to the side */
+  #skills > div h3 {
+    font-size: 2.5rem;
+  }
+
+  /* Scale the skill image to be as high as the full box to fit the length of the longest text on the row, if taller than the regular image proportions */
+  #skills .skill-media img {
+    height: 100%;
+  }
+
+  /* Move the blog category menu to the right side of the blog articles */
+  #blog {
+    grid-template-areas:
+      "blog-heading blog-heading"
+      "blog-articles blog-nav";
+    gap: 0px 2rem;
+  }
+
+  /* Cap the max width of blog articles column on wider viewports */
+  #blog .blog-articles {
+    max-width: 900px;
+  }
+
+  /* Make blog category menu into a sidebar box */
+  #blog aside {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  /* The nav menu will now stick at the top of the screen within the sidebar when scrolling down the blog articles */
+  /* Add bottom margin to avoid colliding with the "Go up" arrow button at the bottom of the sidebar */
+  #blog aside nav {
+    position: sticky;
+    top: 0px;
+    margin-bottom: 50px;
+    flex-direction: column;
+  }
+
+  /* Show the category menu heading */
+  #blog aside h3 {
+    display: block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 1.75rem;
+    text-transform: uppercase;
+  }
+
+  /* Display the category menu links as a vertical list */
+  #blog aside ul {
+    justify-content: flex-start;
+    flex-direction: column;
+    margin: 0;
+    padding: 5px;
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  /* Change category menu items to a button-ish style */
+  #blog aside li {
+    width: 100%;
+    text-align: left;
+    border: 0;
+    padding: 0;
+    font-size: 1.1em;
+  }
+
+  #blog aside li a {
+    padding: 0.3rem 0.75rem;
+    border: 2px solid rgb(16, 16, 16);
+    background-color: rgb(14, 14, 14);
+    border-radius: 1rem 0px 0px 1rem;
+  }
+
+  /* On hover: Change color of button background */
+  #blog aside li a:focus,
+  #blog aside li a:hover {
+    background-color: rgb(28, 28, 28);
+  }
+
+  /* Show the "go up" button at the bottom of the categories sidebar */
+  #blog aside .blog-cat-up {
+    display: block;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Show the speech bubble icon to the right of the contact form */
+  #contact {
+    grid-template-areas:
+      "contact-title contact-title"
+      "contact-form contact-image";
+    grid-template-columns: 2fr 1fr;
+  }
+
+  /* Un-hide the speech bubble image */
+  #contact > img {
+    display: block;
+  }
+}
